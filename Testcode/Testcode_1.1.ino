@@ -1,31 +1,20 @@
-//Functional test code for the reaction time game
-//11/10/2020
-//ECE 411 Group 10
-//Vesion 1.1 - Xiang
-//Note: Trying to add the fucntion: competative mode, the buzzer
-//Things to update: 
-//(MAY)Menu
-//(MUST)Another game mode
-//(MUST)Add a buzzer function
-
 #include <SPI.h>
 #include <Wire.h>
 #include <Adafruit_GFX.h>
 #include <Adafruit_SSD1306.h>
-#define SCREEN_WIDTH 128 // OLED display width, in pixels
-#define SCREEN_HEIGHT 32 // OLED display height, in pixels
-#define OLED_RESET     -1 // Reset pin # (or -1 if sharing Arduino reset pin)
-#define SCREEN_ADDRESS 0x3C ///< See datasheet for Address; 0x3D for 128x64, 0x3C for 128x32
-#define SSD1306_NO_SPLASH 
-Adafruit_SSD1306 display(SCREEN_WIDTH, SCREEN_HEIGHT, &Wire, OLED_RESET);
+#include <algorithm>
 
+#define SCREEN_WIDTH 128   // OLED display width, in pixels
+#define SCREEN_HEIGHT 64   // OLED display height, in pixels
+#define OLED_RESET    -1   // Reset pin # (or -1 if sharing Arduino reset pin)
+#define SCREEN_ADDRESS 0x3C // I2C address for the OLED
+
+Adafruit_SSD1306 display(SCREEN_WIDTH, SCREEN_HEIGHT, &Wire, OLED_RESET);
 
 // Define push buttons and LEDs pins
-const int buttonPins[4] = {D0,D1,D2,D3};
-const int ledPins[4] = {D7,D8,D9,D10};
-const int buzzerPin = D6;
-
-Adafruit_SSD1306 display(SCREEN_WIDTH, SCREEN_HEIGHT, &Wire, OLED_RESET);
+const int buttonPins[4] = {21, 19, 18, 5}; // Adjust these pins as per your hardware setup
+const int ledPins[4] = {22, 23, 25, 26};   // Adjust these pins as per your hardware setup
+const int buzzerPin = 27;                   // Pin connected to the buzzer
 
 // Game variables
 bool inMenu = true;
@@ -216,7 +205,11 @@ void competitionModeGame() {
         Serial.print(randomLED);
         Serial.println(" OFF");
         lastTime = currentTime;
-        interval = max(interval - 100, 500); // Decrease interval to a limit
+        if (interval > 600) {
+          interval -= 100;
+        } else {
+          interval = 500;
+        }
         currentStep++;
       }
       // Check for failure condition (e.g., pressing any button)

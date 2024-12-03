@@ -54,7 +54,7 @@ void setup() {
   display.setCursor(0, 0);
   display.println(" Press any");
   display.println(" button to");
-  display.setTextSize(1);
+  display.setTextSize(2);
   display.setCursor(28, 38);
   display.print("PLAY");
 
