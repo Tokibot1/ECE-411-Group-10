@@ -1,5 +1,7 @@
 // Game Collection 2.0
 // Replaced Tone library with direct PWM control using tone()
+// Problems: Display changed, need a new address 
+// Test the display with the new address first
 
 #include <SPI.h>
 #include <Wire.h>
