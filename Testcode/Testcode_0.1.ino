@@ -1,3 +1,4 @@
+// The first verson, test if the screen can light up
 #include <SPI.h>
 #include <Wire.h>
 #include <Adafruit_GFX.h>

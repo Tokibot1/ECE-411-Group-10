@@ -1,5 +1,10 @@
 // Test code 1.3+
 // Added a new game mode and improved the menu
+// details:
+// 1. Added a new game mode: Memory Game
+// 2. Improved the menu by adding a border and highlighting the selected option
+// 3. Added a welcome screen at the beginning
+// 4. Added a countdown before starting the game
 #include <SPI.h>
 #include <Wire.h>
 #include <Adafruit_GFX.h>
